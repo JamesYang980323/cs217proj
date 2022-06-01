@@ -150,14 +150,16 @@ async def main():
                     # Interest lifetime in ms
                     lifetime=6000)
                 # Print out Data Name, MetaInfo and its conetnt.
-                print(f'Received Data Name: {Name.to_str(data_name)}')
-                print(meta_info)
-                print(bytes(content) if content else None)
+                #print(f'Received Data Name: {Name.to_str(data_name)}')
+                #print(meta_info)
+                #print(bytes(content) if content else None)
+                
 
                 # do Bellman-Ford algorithm (which compares your routing table with your neighbor's routing table)
                 # pickle.dumps(object) serializes object, pickle.loads(object) de-serializes the object
                 #neighborRoutingTable = bytes(content)
-                # pickle.loads(content)
+                neighborRoutingTable = pickle.loads(content)
+                print(neighborRoutingTable)
                 # update the routing table to the new one returned by calling the Bellman-Ford algorithm
                 #doBellmanFord(router, routerTable, neighborRoutingTable)
 
