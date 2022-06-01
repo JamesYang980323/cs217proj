@@ -1,0 +1,34 @@
+docker build -t ndn-dev .
+
+docker run --name cs217proj -it -v "$(pwd)/code":/root/code ndn-dev
+
+
+git clone https://github.com/named-data/ndn-cxx.git
+cd ndn-cxx
+sudo apt install build-essential pkg-config python3-minimal libboost-all-dev libssl-dev libsqlite3-dev
+./waf configure  --enable-static
+./waf
+sudo ./waf install
+sudo ldconfig
+cd ..
+
+git clone --recursive https://github.com/named-data/NFD.git
+cd NFD
+./waf configure
+./waf
+sudo ./waf install
+cd ..
+sudo cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf
+
+git clone https://github.com/named-data/ndn-tools
+cd ndn-tools
+./waf configure 
+./waf -j`nproc`
+./waf install
+
+sudo apt install python3-pip
+pip install python-ndn
+
+ndnsec key-gen /$(whoami) | ndnsec cert-install -
+
+nfd-start

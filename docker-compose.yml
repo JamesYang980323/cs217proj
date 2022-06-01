@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  web_219:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    image: cs219_backend
+    container_name: cs219_backend
+    command: bash initialize.sh
+    volumes:
+      - .:/code
+    # ports:
+      # - "8000:8000"
+    depends_on:
+      - database_219
+  
+  database_219:
+    image: postgres:14
+    container_name: cs219_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=cs219
+    volumes:
+      - postgresdbvol:/var/lib/postgresql/data
+
+volumes:
+  postgresdbvol:
+  caddy_data:
+  caddy_config:
+  grafana_storage:
+
+version: "3.9"
+
+services:
+  ndn_env:
+    image: node:lts
+    volumes:
+      - cs217:/code
+volumes:
+  cs217:
