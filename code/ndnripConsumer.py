@@ -70,13 +70,19 @@ def findCost(neighborRouterPrefix, routerNeighbors):
 
 def doBellmanFord(router, routerTable, neighborRoutingTable):
 #def doBellmanFord(router, routerTable):
-    routerNeighbors = router.getNeighbors()
+    routerNeighbors = router.neighbors
+    print("router neighbors: ")
+    print(routerNeighbors)
 
      # find which router name this neighbor is
     neighborRouterPrefix = findNeighborRouterPrefix(neighborRoutingTable)
+    print("neighbor router prefix: ")
+    print(neighborRouterPrefix)
 
     # find the cost of the edge from your router prefix to the neighbor router prefix
     cost = findCost(neighborRouterPrefix, routerNeighbors)
+    print("neighbor router cost: ")
+    print(cost)
     
     for routerRow, neighborRow in zip(routerTable, neighborRoutingTable):
         # we know your router can reach <destination> in <distance> via <nextHop>
@@ -91,8 +97,8 @@ def doBellmanFord(router, routerTable, neighborRoutingTable):
                     # compare cost(your router, neighbor) + current distance in routing table to current distance in neighbor table
                     # if the cost + current distance is less than the neighbor's current distance, 
                     # alter your current routing talbe distance and next hop as necessary
-                    if (cost + routerRow[1]) < neighborRow[1]:
-                        routerRow[1] = neighborRow[1]
+                    if (cost + neighborRow[1] < routerRow[1]):
+                        routerRow[1] = cost + neighborRow[1]
                         routerRow[2] = neighborRouterPrefix 
 
 def findNextHops(routingTable, routersWithPrefixList):
@@ -159,9 +165,12 @@ async def main():
                 # pickle.dumps(object) serializes object, pickle.loads(object) de-serializes the object
                 #neighborRoutingTable = bytes(content)
                 neighborRoutingTable = pickle.loads(content)
+                print("initial routing table: ")
                 print(neighborRoutingTable)
                 # update the routing table to the new one returned by calling the Bellman-Ford algorithm
-                #doBellmanFord(router, routerTable, neighborRoutingTable)
+                doBellmanFord(router, routerTable, neighborRoutingTable)
+                print("after Bellman-Ford")
+                print(routerTable)
 
             except InterestNack as e:
                 # A NACK is received
@@ -175,12 +184,10 @@ async def main():
             except ValidationFailure:
                 # Validation failure
                 print(f'Data failed to validate')
-            finally:
-                # see if Interest is valid
-                print("here")
 
         # have updated routing table from all neighbor routing tables, now figure out which routers have the prefix you're looking for
         # then, construct multiple next hops (consisting of their distance and corresponding next hop)
+
         #prefixToFind = "/a"
         #routerList = config.prefixDict.get(prefixToFind)
         #if None != routerList:
@@ -189,5 +196,9 @@ async def main():
         # have next hops, now add a FIB entry
         #prefixKey = prefixToFind
         #forwardInformationBase.addKeyValue(prefixKey, nextHopsList)
+
+        
+
+
 
 app.run_forever(after_start=main())
