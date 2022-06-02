@@ -1,16 +1,3 @@
-""" from ndn.app import NDNApp
-app = NDNApp()
-
-async def main():
-    @app.route('/example/testApp')
-    def on_interest(name, interest_param, application_param):
-        app.put_data(name, content=b'content', freshness_period=10000)
-
-app.run_forever(after_start=main()) """
-
-# ---------------------------------------------------------------------------
-# ---------------------------------------------------------------------------
-
 from ndn.app import NDNApp
 
 import config
@@ -38,7 +25,6 @@ async def main():
 
     @app.route(routerPrefix)
     def on_interest(name, interest_param, application_param):
-        # app.put_data(name, content=b'routing table', freshness_period=10000)
         app.put_data(name, content=pickle.dumps(resultTable), freshness_period=10000)
 
 app.run_forever(after_start=main())

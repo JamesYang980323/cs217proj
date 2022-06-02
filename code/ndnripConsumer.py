@@ -1,43 +1,3 @@
-""" from ndn.encoding import Name
-from ndn.types import *
-from ndn.app import NDNApp
-
-app = NDNApp()
-
-async def main():
-    for i in range(10):
-        try:
-            data_name, meta_info, content = await app.express_interest(
-                # Interest Name
-                '/example/testApp/random',
-                must_be_fresh=True,
-                can_be_prefix=False,
-                # Interest lifetime in ms
-                lifetime=6000)
-            # Print out Data Name, MetaInfo and its conetnt.
-            print(f'Received Data Name: {Name.to_str(data_name)}')
-            print(meta_info)
-            print(bytes(content) if content else None)
-        except InterestNack as e:
-            # A NACK is received
-            print(f'Nacked with reason={e.reason}')
-        except InterestTimeout:
-            # Interest times out
-            print(f'Timeout')
-        except InterestCanceled:
-            # Connection to NFD is broken
-            print(f'Canceled')
-        except ValidationFailure:
-            # Validation failure
-            print(f'Data failed to validate')
-        finally:
-            print("hello")
-app.run_forever(after_start=main()) """
-
-# --------------------------------------------------------------
-# --------------------------------------------------------------
-# --------------------------------------------------------------
-
 from sys import argv # used to read in your router prefix name
 from math import inf # used as element(s) within routing tables for Bellman-Ford calculation
 import time # used for wait for certain amount of seconds before asking for neighbor's routing table
@@ -69,7 +29,6 @@ def findCost(neighborRouterPrefix, routerNeighbors):
     return None
 
 def doBellmanFord(router, routerTable, neighborRoutingTable):
-#def doBellmanFord(router, routerTable):
     routerNeighbors = router.neighbors
     print("router neighbors: ")
     print(routerNeighbors)
@@ -155,15 +114,9 @@ async def main():
                     can_be_prefix=False,
                     # Interest lifetime in ms
                     lifetime=6000)
-                # Print out Data Name, MetaInfo and its conetnt.
-                #print(f'Received Data Name: {Name.to_str(data_name)}')
-                #print(meta_info)
-                #print(bytes(content) if content else None)
-                
 
                 # do Bellman-Ford algorithm (which compares your routing table with your neighbor's routing table)
                 # pickle.dumps(object) serializes object, pickle.loads(object) de-serializes the object
-                #neighborRoutingTable = bytes(content)
                 neighborRoutingTable = pickle.loads(content)
                 print("initial routing table: ")
                 print(neighborRoutingTable)
@@ -188,17 +141,25 @@ async def main():
         # have updated routing table from all neighbor routing tables, now figure out which routers have the prefix you're looking for
         # then, construct multiple next hops (consisting of their distance and corresponding next hop)
 
-        #prefixToFind = "/a"
-        #routerList = config.prefixDict.get(prefixToFind)
-        #if None != routerList:
-        #    nextHopsList = findNextHops(routerTable, routerList)
-        
-        # have next hops, now add a FIB entry
-        #prefixKey = prefixToFind
-        #forwardInformationBase.addKeyValue(prefixKey, nextHopsList)
+        prefixToFind1 = "/a"
+        routerList1 = config.prefixDict.get(prefixToFind1)
+        if None != routerList1:
+            nextHopsList1 = findNextHops(routerTable, routerList1)
+        print("nextHops for /a: ")
+        print(nextHopsList1)
 
-        
+        prefixToFind2 = "/b"
+        routerList2 = config.prefixDict.get(prefixToFind2)
+        if None != routerList2:
+            nextHopsList2 = findNextHops(routerTable, routerList2)
+        print("nextHops for /b: ")
+        print(nextHopsList2)
 
+        # have next hops, now add FIB entries
+        forwardInformationBase.add(prefixToFind1, nextHopsList1)
+        forwardInformationBase.add(prefixToFind2, nextHopsList2)
+        print("FIB: ")
+        forwardInformationBase.print()
 
 
 app.run_forever(after_start=main())

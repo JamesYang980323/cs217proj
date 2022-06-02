@@ -1,13 +1,13 @@
 class Fib:
     def __init__(self):
-        self.table = {}
+        self.table = []
     
-    def addKeyValue(self, prefix, listNextHops):
-        self.table[prefix] = listNextHops
-        """ wantToAdd = {prefix, listNextHops}
-        for key, value in wantToAdd.items():
-            if key in self.table:
-                self.table[key] = [self.table[key], value]
-            else:
-                self.table[key] = value """
-        
+    def add(self, prefix, listNextHops):
+        for [name, nextHops] in self.table:
+            if name == prefix:
+                nextHops = listNextHops
+                return
+        self.table.append([prefix, listNextHops])
+    
+    def print(self):
+        print(self.table)
