@@ -31,4 +31,20 @@ pip install python-ndn
 
 ndnsec key-gen /$(whoami) | ndnsec cert-install -
 
-nfd-start
+to start nfd node:
+`nfd-start`
+
+each router will have to run both ndnripProducer.py and ndnripConsumer.py
+therefore, have two terminals open for each router
+to have multiple terminals use the same container: first open a new terminal
+get the hashed container id
+`docker ps`
+
+copy the hashed id and then enter the container:
+`docker exec -it [hashed_id] bash`
+
+once set up all the terminals, cd to /code and run ndnripProducer.py and ndnripConsumer.py
+
+example: `python3 ndnripProducer.py /routerX`
+
+
