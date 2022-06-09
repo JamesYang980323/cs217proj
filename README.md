@@ -1,4 +1,7 @@
-## Setup Instructions
+## Linux Setup Instructions
+
+Clone our repo:
+'git clone https://github.com/JamesYang980323/cs217proj.git'
 
 Get and run Docker container
 ```
