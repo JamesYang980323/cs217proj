@@ -61,14 +61,14 @@ To have multiple terminals use the same container:
 Once all the terminals have been set up, change directory ('cd') to /code and run ndnripProducer.py and ndnripConsumer.py for each router.
 To do this, we have 6 commands to run and 6 terminals open. 
 For each terminal, run one of the following commands that corresponds to the producer/consumer and the router prefix that you choose for that terminal.
-```
-python3 ndnripProducer.py /routerX
-python3 ndnripConsumer.py /routerX
-python3 ndnripProducer.py /routerY
-python3 ndnripConsumer.py /routerY
-python3 ndnripProducer.py /routerZ
-python3 ndnripConsumer.py /routerZ
-```
+
+`python3 ndnripProducer.py /routerX`
+`python3 ndnripConsumer.py /routerX`
+`python3 ndnripProducer.py /routerY`
+`python3 ndnripConsumer.py /routerY`
+`python3 ndnripProducer.py /routerZ`
+`python3 ndnripConsumer.py /routerZ`
+
 In conclusion, one terminal should be running `python3 ndnripProducer.py /routerX`, 
 a second one should be running `python3 ndnripConsumer.py /routerX`,
 a third one should be running `python3 ndnripProducer.py /routerY`,
