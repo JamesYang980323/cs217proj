@@ -31,6 +31,8 @@ pip install python-ndn
 
 ndnsec key-gen /$(whoami) | ndnsec cert-install -
 
+===========================================================================
+
 to start nfd node:
 `nfd-start`
 
