@@ -50,7 +50,7 @@ Since our project has 3 routers, you should have 6 terminals open in total.
 
 To have multiple terminals use the same container: 
 1) open a new terminal
-2) get the hashed container id
+2) get the Docker container name: 
 `docker ps --all`
 3) find the name of the Docker container and then enter the container using docker exec:
 `docker exec -it <name of container> bash`
