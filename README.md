@@ -12,7 +12,7 @@ docker build -t ndn-dev .
 docker run --name cs217proj -it -v "$(pwd)/code":/root/code ndn-dev
 ```
 
-Get necessary prerequisite NDN modules - ndn-cxx, NFD, ndn-tools, and python-ndn
+Get necessary prerequisite NDN modules - ndn-cxx, NFD, ndn-tools, and python-ndn:
 ```
 git clone https://github.com/named-data/ndn-cxx.git
 cd ndn-cxx
@@ -40,7 +40,7 @@ cd ndn-tools
 sudo apt install python3-pip
 pip install python-ndn
 ```
-Setup default security chain using ndnsec
+Setup default security chain using ndnsec:
 ```
 ndnsec key-gen /$(whoami) | ndnsec cert-install -
 ```
@@ -62,7 +62,7 @@ To have multiple terminals use the same container:
 
 Once all the terminals have been set up, change directory ('cd') to /code and run ndnripProducer.py and ndnripConsumer.py for each router.
 To do this, we have 6 commands to run and 6 terminals open. 
-For each terminal, run one of the following commands that corresponds to the producer/consumer and the router prefix that you choose for that terminal.
+For each terminal, run one of the following commands that corresponds to the producer/consumer and the router prefix that you choose for that terminal:
 
 ```python3 ndnripProducer.py /routerX```
 ```python3 ndnripConsumer.py /routerX```
