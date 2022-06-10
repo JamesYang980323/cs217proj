@@ -62,7 +62,7 @@ To have multiple terminals use the same container:
 3) Enter the container using docker exec:
 ```docker exec -it <name of container> bash```
 
-Once all the terminals have been set up, change directory ('cd') to /code and run ndnripProducer.py and ndnripConsumer.py for each router.
+Once all the terminals have been set up, change directory ('cd') to /code for each terminal and run ndnripProducer.py and ndnripConsumer.py for each router.
 To do this, we have 6 commands to run and 6 terminals open. 
 For each terminal, run one of the following commands that corresponds to the producer/consumer and the router prefix that you choose for that terminal:
 
