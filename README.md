@@ -57,9 +57,9 @@ Since our project has 3 routers, you should have 6 terminals open in total.
 
 To have multiple terminals use the same container: 
 1) open a new terminal
-2) get the Docker container name: 
+2) find the Docker container name: 
 ```docker ps --all```
-3) find the name of the Docker container and then enter the container using docker exec:
+3) Enter the container using docker exec:
 ```docker exec -it <name of container> bash```
 
 Once all the terminals have been set up, change directory ('cd') to /code and run ndnripProducer.py and ndnripConsumer.py for each router.
