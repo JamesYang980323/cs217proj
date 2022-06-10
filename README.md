@@ -47,7 +47,7 @@ ndnsec key-gen /$(whoami) | ndnsec cert-install -
 
 # Project Usage
 Start nfd:
-```nfd-start```
+```nfd-start```.
 Then navigate to the /code folder containing our project Python code.
 
 Each router will have to run both ndnripProducer.py and ndnripConsumer.py.
